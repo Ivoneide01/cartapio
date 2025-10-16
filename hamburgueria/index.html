@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburgueria Delivery - Faça seu Pedido</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>🍔 Hamburgueria Delivery</h1>
+                    <p class="subtitle">Escolha seus produtos e faça seu pedido pelo WhatsApp</p>
+                </div>
+                <button class="cart-icon" onclick="abrirCarrinho()">
+                    🛒
+                    <span id="cart-count" class="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modal do Carrinho -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2>🛒 Seu Pedido</h2>
+                <button class="btn-close" onclick="fecharCarrinho()">✕</button>
+            </div>
+            
+            <div id="modal-carrinho-items" class="modal-cart-items">
+                <p class="empty-cart">Seu carrinho está vazio</p>
+            </div>
+            
+            <div class="cart-modal-footer">
+                <div class="cart-total">
+                    <strong>Total:</strong>
+                    <span id="modal-total-valor">R$ 0,00</span>
+                </div>
+
+                <div class="customer-info">
+                    <h3>Dados para Entrega</h3>
+                    <input type="text" id="modal-cliente-nome" placeholder="Seu nome" required>
+                    <input type="text" id="modal-cliente-endereco" placeholder="Endereço completo" required>
+                </div>
+
+                <button class="btn-whatsapp" onclick="finalizarPedido()">
+                    📱 Finalizar Pedido no WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="content-wrapper">
+            <!-- Seção do Cardápio -->
+            <section class="menu-section">
+                <h2>Nosso Cardápio</h2>
+
+                <!-- Hambúrgueres -->
+                <div class="category">
+                    <h3>🍔 Hambúrgueres</h3>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <h4>X-Burger Clássico</h4>
+                            <p class="description">Pão, hambúrguer, queijo, alface, tomate e maionese</p>
+                            <p class="price">R$ 25,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('X-Burger Clássico', 25.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>X-Bacon</h4>
+                            <p class="description">Pão, hambúrguer, queijo, bacon crocante e molho especial</p>
+                            <p class="price">R$ 28,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('X-Bacon', 28.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>X-Egg</h4>
+                            <p class="description">Pão, hambúrguer, queijo, ovo, alface e tomate</p>
+                            <p class="price">R$ 27,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('X-Egg', 27.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>X-Tudo</h4>
+                            <p class="description">Pão, hambúrguer, queijo, bacon, ovo, salada completa</p>
+                            <p class="price">R$ 32,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('X-Tudo', 32.00)">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pastéis -->
+                <div class="category">
+                    <h3>🥟 Pastéis</h3>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <h4>Pastel de Carne</h4>
+                            <p class="description">Recheio generoso de carne moída temperada</p>
+                            <p class="price">R$ 8,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pastel de Carne', 8.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Pastel de Queijo</h4>
+                            <p class="description">Queijo derretido e saboroso</p>
+                            <p class="price">R$ 7,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pastel de Queijo', 7.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Pastel de Frango</h4>
+                            <p class="description">Frango desfiado com catupiry</p>
+                            <p class="price">R$ 9,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pastel de Frango', 9.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Pastel de Pizza</h4>
+                            <p class="description">Mussarela, presunto e orégano</p>
+                            <p class="price">R$ 8,50</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pastel de Pizza', 8.50)">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Esfihas -->
+                <div class="category">
+                    <h3>🥙 Esfihas</h3>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <h4>Esfiha de Carne</h4>
+                            <p class="description">Massa fofinha com carne temperada</p>
+                            <p class="price">R$ 6,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Esfiha de Carne', 6.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Esfiha de Queijo</h4>
+                            <p class="description">Queijo derretido gratinado</p>
+                            <p class="price">R$ 5,50</p>
+                            <button class="btn-add" onclick="adicionarProduto('Esfiha de Queijo', 5.50)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Esfiha de Frango</h4>
+                            <p class="description">Frango desfiado com requeijão</p>
+                            <p class="price">R$ 6,50</p>
+                            <button class="btn-add" onclick="adicionarProduto('Esfiha de Frango', 6.50)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Esfiha de Calabresa</h4>
+                            <p class="description">Calabresa picante com cebola</p>
+                            <p class="price">R$ 6,50</p>
+                            <button class="btn-add" onclick="adicionarProduto('Esfiha de Calabresa', 6.50)">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pizzas -->
+                <div class="category">
+                    <h3>🍕 Pizzas</h3>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <h4>Pizza Margherita</h4>
+                            <p class="description">Molho, mussarela, tomate e manjericão</p>
+                            <p class="price">R$ 35,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pizza Margherita', 35.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Pizza Calabresa</h4>
+                            <p class="description">Molho, mussarela, calabresa e cebola</p>
+                            <p class="price">R$ 38,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pizza Calabresa', 38.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Pizza Portuguesa</h4>
+                            <p class="description">Molho, mussarela, presunto, ovo, cebola e azeitona</p>
+                            <p class="price">R$ 42,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pizza Portuguesa', 42.00)">Adicionar</button>
+                        </div>
+                        <div class="product-card">
+                            <h4>Pizza Quatro Queijos</h4>
+                            <p class="description">Molho, mussarela, provolone, gorgonzola e parmesão</p>
+                            <p class="price">R$ 45,00</p>
+                            <button class="btn-add" onclick="adicionarProduto('Pizza Quatro Queijos', 45.00)">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Hamburgueria Delivery. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
